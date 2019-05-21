@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">ComponetesKotlin</string>
+
+    <string-array name="weigth_array">
+        <item>Gramas</item>
+        <item>Kilos</item>
+        <item>Arroba</item>
+        <item>Ton</item>
+    </string-array>
 </resources>

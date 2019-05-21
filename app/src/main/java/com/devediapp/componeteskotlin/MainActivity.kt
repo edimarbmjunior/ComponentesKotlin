@@ -8,22 +8,30 @@ import android.support.design.widget.Snackbar
 import android.support.v4.content.ContextCompat
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.TextView
 import android.widget.Toast
+import com.devediapp.componeteskotlin.util.MockData
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity(), View.OnClickListener {
+class MainActivity : AppCompatActivity(), View.OnClickListener, AdapterView.OnItemSelectedListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         setListeners()
+        loadSpinner()
     }
 
     private fun setListeners(){
         buttonToastMe.setOnClickListener(this)
         buttonSnackMe.setOnClickListener(this)
+        buttonGetSpinner.setOnClickListener(this)
+        buttonSetSpinner.setOnClickListener(this)
+
+        spinnerDynamic.onItemSelectedListener = this
     }
 
     override fun onClick(view: View) {
@@ -66,6 +74,30 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             snackbar.setActionTextColor(Color.MAGENTA)
 
             snackbar.show()
+        }else if(id == R.id.buttonGetSpinner){
+            //val value = spinnerDynamic.selectedItem.toString()
+            val value = spinnerDynamic.selectedItemPosition.toString()
+            Snackbar.make(constraintLayout, "Button GetSpinner! Posicao="+value, Snackbar.LENGTH_LONG).show()
+        }else if(id == R.id.buttonSetSpinner){
+            spinnerDynamic.setSelection(1)
+            Snackbar.make(constraintLayout, "Button SetSpinner!"+spinnerDynamic.setSelection(3).toString(), Snackbar.LENGTH_LONG).show()
         }
+    }
+
+    private fun loadSpinner(){
+        val list = MockData.getListCompanionObject()
+
+        val adapter = ArrayAdapter(applicationContext, android.R.layout.simple_spinner_dropdown_item, list)
+
+        spinnerDynamic.adapter = adapter
+    }
+
+    override fun onNothingSelected(parent: AdapterView<*>?) {
+        TODO("not implemented")
+    }
+
+    override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+        val value : String = parent.getItemAtPosition(position).toString()
+        Toast.makeText(applicationContext, "Valor selecionado="+value, Toast.LENGTH_LONG).show()
     }
 }
