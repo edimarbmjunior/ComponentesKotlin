@@ -94,4 +94,59 @@
             app:layout_constraintTop_toBottomOf="@+id/linearLayoutSpinner"
     />
 
+    <SeekBar
+            android:id="@+id/seekValue"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/buttonProgress"
+            android:layout_marginTop="4mm"
+            android:max="20"
+            android:min="0"
+    />
+
+    <TextView
+            android:id="@+id/textSeekValue"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/seekValue"
+            android:layout_marginTop="1mm"
+            android:text="seekBar value"
+    />
+
+    <LinearLayout
+            android:id="@+id/linearLayoutSeek"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@+id/textSeekValue"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginTop="3.5mm"
+    >
+        <Button
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Get Seek"
+                android:id="@+id/buttonGetSeek"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+        />
+        <Button
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Set Seek"
+                android:id="@+id/buttonSetSeek"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+        />
+    </LinearLayout>
+
 </android.support.constraint.ConstraintLayout>

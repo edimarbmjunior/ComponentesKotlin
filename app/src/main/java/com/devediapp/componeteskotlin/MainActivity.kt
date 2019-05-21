@@ -9,14 +9,11 @@ import android.support.design.widget.Snackbar
 import android.support.v4.content.ContextCompat
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import com.devediapp.componeteskotlin.util.MockData
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity(), View.OnClickListener, AdapterView.OnItemSelectedListener {
+class MainActivity : AppCompatActivity(), View.OnClickListener, AdapterView.OnItemSelectedListener, SeekBar.OnSeekBarChangeListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,8 +29,12 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, AdapterView.OnIt
         buttonGetSpinner.setOnClickListener(this)
         buttonSetSpinner.setOnClickListener(this)
         buttonProgress.setOnClickListener(this)
+        buttonGetSeek.setOnClickListener(this)
+        buttonSetSeek.setOnClickListener(this)
 
         spinnerDynamic.onItemSelectedListener = this
+
+        seekValue.setOnSeekBarChangeListener(this)
     }
 
     override fun onClick(view: View) {
@@ -79,13 +80,13 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, AdapterView.OnIt
         }else if(id == R.id.buttonGetSpinner){
             //val value = spinnerDynamic.selectedItem.toString()
             val value = spinnerDynamic.selectedItemPosition.toString()
-            Snackbar.make(constraintLayout, "Button GetSpinner! Posicao="+value, Snackbar.LENGTH_LONG).show()
+            Toast.makeText(applicationContext, "Button GetSpinner! Posicao="+value, Snackbar.LENGTH_LONG).show()
         }else if(id == R.id.buttonSetSpinner){
             spinnerDynamic.setSelection(1)
-            Snackbar.make(constraintLayout, "Button SetSpinner!"+spinnerDynamic.setSelection(3).toString(), Snackbar.LENGTH_LONG).show()
+            Toast.makeText(applicationContext, "Button SetSpinner!"+spinnerDynamic.setSelection(3).toString(), Snackbar.LENGTH_LONG).show()
         }else if(id == R.id.buttonProgress){
 
-            val progress : ProgressDialog = ProgressDialog(this)
+            val progress = ProgressDialog(this)
             progress.setTitle("Titulo")
             progress.setMessage("Mensagem")
             progress.show()
@@ -93,6 +94,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, AdapterView.OnIt
             //progress.hide()
             //progress.dismiss()
 
+        }else if(id == R.id.buttonGetSeek){
+            val progress = seekValue.progress.toString()
+            Toast.makeText(applicationContext, "SeekBar! Posicao="+progress, Snackbar.LENGTH_LONG).show()
+        }else if(id == R.id.buttonSetSeek){
+            seekValue.progress = 10
         }
     }
 
@@ -108,8 +114,26 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, AdapterView.OnIt
         TODO("not implemented")
     }
 
-    override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
-        val value : String = parent.getItemAtPosition(position).toString()
-        Toast.makeText(applicationContext, "Valor selecionado="+value, Toast.LENGTH_LONG).show()
+    override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
+        val id = view.id
+        if(id == R.id.spinnerDynamic){
+            val value : String = parent.getItemAtPosition(position).toString()
+            Toast.makeText(applicationContext, "Valor selecionado="+value, Toast.LENGTH_LONG).show()
+        }
+    }
+
+    override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
+        val id = seekBar.id
+        if(id == R.id.seekValue){
+            textSeekValue.text = progress.toString()
+        }
+    }
+
+    override fun onStartTrackingTouch(seekBar: SeekBar) {
+
+    }
+
+    override fun onStopTrackingTouch(seekBar: SeekBar) {
+
     }
 }
