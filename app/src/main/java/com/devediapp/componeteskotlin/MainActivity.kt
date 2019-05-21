@@ -3,6 +3,9 @@ package com.devediapp.componeteskotlin
 import android.graphics.Color
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.constraint.ConstraintLayout
+import android.support.design.widget.Snackbar
+import android.support.v4.content.ContextCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
@@ -20,6 +23,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun setListeners(){
         buttonToastMe.setOnClickListener(this)
+        buttonSnackMe.setOnClickListener(this)
     }
 
     override fun onClick(view: View) {
@@ -40,6 +44,28 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             textView.text = "Toast notification!"
 
             toast.show()
+        }else if(id == R.id.buttonSnackMe){
+            //Elemento relativamente novo, por isso não está na biobliteca padrão do android
+            //sendo que tem que adicionar a biblioteca que contem snack
+            val snackbar = Snackbar.make(constraintLayout, "Snack bar notification!", Snackbar.LENGTH_LONG)
+
+            snackbar.view.findViewById<TextView>(android.support.design.R.id.snackbar_text).setTextColor(Color.RED)
+            snackbar.view.setBackgroundColor(Color.YELLOW)
+
+            //Recuperar a cor de arquivo(colors.xml) de resources criado como suporte para armazenamento de cores em um unico lugar
+            //Código abaixo está devasado, será retirado de uso a partir da API 27
+            //resources.getColor(R.color.colorAccent)
+            //Novo código suportado
+            ContextCompat.getColor(this, R.color.colorAccent)
+
+            //Código para defazer uma ação
+            snackbar.setAction("Desfazer a ação que fez?", {
+                Snackbar.make(constraintLayout, "Ação desfeita!", Snackbar.LENGTH_LONG).show()
+            })
+
+            snackbar.setActionTextColor(Color.MAGENTA)
+
+            snackbar.show()
         }
     }
 }
