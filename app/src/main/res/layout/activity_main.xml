@@ -83,4 +83,15 @@
         />
     </LinearLayout>
 
+    <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Progress"
+            android:id="@+id/buttonProgress"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginTop="3mm"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayoutSpinner"
+    />
+
 </android.support.constraint.ConstraintLayout>

@@ -1,5 +1,6 @@
 package com.devediapp.componeteskotlin
 
+import android.app.ProgressDialog
 import android.graphics.Color
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -30,6 +31,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, AdapterView.OnIt
         buttonSnackMe.setOnClickListener(this)
         buttonGetSpinner.setOnClickListener(this)
         buttonSetSpinner.setOnClickListener(this)
+        buttonProgress.setOnClickListener(this)
 
         spinnerDynamic.onItemSelectedListener = this
     }
@@ -81,6 +83,16 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, AdapterView.OnIt
         }else if(id == R.id.buttonSetSpinner){
             spinnerDynamic.setSelection(1)
             Snackbar.make(constraintLayout, "Button SetSpinner!"+spinnerDynamic.setSelection(3).toString(), Snackbar.LENGTH_LONG).show()
+        }else if(id == R.id.buttonProgress){
+
+            val progress : ProgressDialog = ProgressDialog(this)
+            progress.setTitle("Titulo")
+            progress.setMessage("Mensagem")
+            progress.show()
+
+            //progress.hide()
+            //progress.dismiss()
+
         }
     }
 
